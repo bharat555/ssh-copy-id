@@ -11,7 +11,10 @@ class SshCopy:
 		self.host = host
 		self.passwd = passwd
 		self.port = port
-		
+	
+        def displayArgs(self):
+               print "key : ", self.pub_key, ", user :", self.user, ", host :", self.host, ", passwd :", self.passwd, ", port :", self.port
+               
 	def send(self):
 		str_ssh = '/usr/bin/ssh-copy-id -i %s %s@%s -p %s' %(self.pub_key,self.user,self.host, self.port)
 		child = pexpect.spawn( str_ssh )
@@ -35,3 +38,7 @@ class SshCopy:
 			child.close()
 		else:
 			print 'nada feito'
+			
+result=SshCopy('test','1.1.1.1','test','22')
+result.displayArgs()
+result.send()
